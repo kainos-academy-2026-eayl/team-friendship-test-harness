@@ -4,7 +4,7 @@ export default defineConfig({
   testDir: './tests',
   reporter: [['html'], ['list', { printSteps: true }]],
   use: {
-    baseURL: 'https://practice.expandtesting.com/',
+    baseURL: 'http://localhost:8000/',
     testIdAttribute: 'id'
   },
 });
