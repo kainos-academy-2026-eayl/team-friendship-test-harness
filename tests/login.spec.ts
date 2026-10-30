@@ -35,7 +35,7 @@ test('that a user can register and login', async ({ page, request }) => {
   // Get the status of the register
   // We expect it to be a success
   await expect(page.getByTestId('status')).toHaveText('Account created successfully.');
-  expect(response.ok()).toBeTruthy();
+  expect(response.status()).toBe(200);
 
   // Navigate to the login page after registration
   await page.goto('login');
@@ -52,5 +52,5 @@ test('that a user can register and login', async ({ page, request }) => {
 
   // Get the status of the login
   // We expect it to be a success
-  expect(loginResponse.ok()).toBeTruthy();
+  expect(loginResponse.status()).toBe(200);
 });
