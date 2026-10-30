@@ -3,8 +3,7 @@ import { testAccountVariables } from './testVariables'; //Import our testing var
 
 // Testing that a user can login to their account
 // By registering a new user and logging in with those credentials
-
-test('that a user can register and login', async ({ page }) => {
+test('that a user can register and login', async ({ page, request }) => {
   
   // Navigate to our register page
   await page.goto('register');
@@ -26,11 +25,20 @@ test('that a user can register and login', async ({ page }) => {
   await page.getByTestId('password').fill(testAccountVariables.password);
   await page.getByTestId('confirm-password').click();
   await page.getByTestId('confirm-password').fill(testAccountVariables.password);
+
+  // Define a respose constant to check the page status
+  const response = await request.get('/register');
+
+  // Submit the registration form
   await page.getByTestId('register-submit').click();
 
   // Get the status of the register
-  // We expect it to be a success and thus show us the success text
+  // We expect it to be a success
   await expect(page.getByTestId('status')).toHaveText('Account created successfully.');
+  expect(response.ok()).toBeTruthy();
+
+  // Navigate to the login page after registration
+  await page.goto('login');
 
   // Logging in with the registered details
   await page.getByTestId('email').click();
@@ -38,4 +46,11 @@ test('that a user can register and login', async ({ page }) => {
   await page.getByTestId('password').click();
   await page.getByTestId('password').fill(testAccountVariables.password);
   await page.getByTestId('login-submit').click();
+
+  // Define a response constant to check the page status
+  const loginResponse = await request.get('/login');
+
+  // Get the status of the login
+  // We expect it to be a success
+  expect(loginResponse.ok()).toBeTruthy();
 });
