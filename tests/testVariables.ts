@@ -8,3 +8,14 @@ export const testAccountVariables = {
   postcode: 'BT12 AAA',
   password: 'TheBestPassword123!'
 }
+
+// Product variables
+export const productVariables = {
+  nameOne: 'Marble',
+  priceOne: '£30.88',
+  imageOne: 'Marble',
+
+  nameTwo: 'Pokemon',
+  priceTwo: '£45.00',
+  imageTwo: 'Pokemon'
+}
